@@ -1,5 +1,6 @@
 import logging
 import sys
+import os
 
 import jsonargparse
 import pynetbox
@@ -13,6 +14,7 @@ def get_config():
             '/etc/netbox_agent.yaml',
             '~/.config/netbox_agent.yaml',
             '~/.netbox_agent.yaml',
+            os.getcwd()+'/netbox_agent/.config/netbox_agent.yaml'
         ],
         prog='netbox_agent',
         description="Netbox agent to run on your infrastructure's servers",
