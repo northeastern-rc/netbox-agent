@@ -193,9 +193,12 @@ def _parse(buffer):
                     # We are out of the \t\t block; reset it again, and let
                     # the parsing continue
                     in_block_elemet = ''
-
-            record_data = _record_re.findall(record_element[i])
-
+            curr_element = record_element[i]
+            if curr_element.count(':') > 1:
+                first_colon_idx = curr_element.find(":")+1
+                second_colon_idx = curr_element[first_colon_idx:].find(":")+first_colon_idx
+                curr_element = curr_element[:second_colon_idx]
+            record_data = _record_re.findall(curr_element)
             #  Is this the line containing handle identifier, type, size?
             if record_data:
                 output_data[dmi_handle][record_data[0][0]] = record_data[0][1]
