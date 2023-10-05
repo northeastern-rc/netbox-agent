@@ -408,9 +408,10 @@ class ServerBase():
 
         logging.debug('Updating Server...')
         # check network cards
-        if config.register or config.update_all or config.update_network:
-            self.network = ServerNetwork(server=self)
-            self.network.create_or_update_netbox_network_cards()
+        # Uninterested in checking network cards
+        #if config.register or config.update_all or config.update_network:
+        #    self.network = ServerNetwork(server=self)
+        #    self.network.create_or_update_netbox_network_cards()
         update_inventory = config.inventory and (config.register or
                 config.update_all or config.update_inventory)
         # update inventory if feature is enabled
