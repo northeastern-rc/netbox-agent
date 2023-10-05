@@ -77,7 +77,8 @@ class Inventory():
     def find_or_create_manufacturer(self, name):
         if name is None:
             return None
-
+        #super hacky
+        name = name.title()
         manufacturer = nb.dcim.manufacturers.get(
             name=name,
         )
@@ -442,6 +443,8 @@ class Inventory():
 
         # create disks that are not in netbox
         for disk in disks:
+            if disk.get('SN') is None:
+                disk['SN'] = 'deadcow'
             if disk.get('SN') not in [d.serial for d in nb_disks]:
                 self.create_netbox_disk(disk)
 
